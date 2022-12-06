@@ -1,10 +1,10 @@
-{{ config (materialized = 'table')}}
+{{ config(materialized = 'table')}}
 
 -- Denormalizing table to daily
 with epidemiology as (
 
-    select 
-    * 
+    select
+    *
     from {{ ref('base_epidemiology')}}
 
 ),
@@ -18,21 +18,21 @@ demographics as (
 economy as (
 
     select
-    *
+        *
     from {{ ref('base_economy')}}
 
-),
+    ),
 index as (
 
     select
-    *
+        *
     from {{ ref('base_index')}}
 
-),
+    ),
 
 epidemiology_join as (
 
-    select
+    select        
         epidemiology.date,
         epidemiology.location_key,
         iff(epidemiology.new_confirmed = 'NaN', 0, epidemiology.new_confirmed) as new_confirmed,
@@ -64,18 +64,18 @@ epidemiology_join as (
         demographics.population_age_60_69,
         demographics.population_age_70_79,
         demographics.population_age_80_and_older,
-        index.place_id,
-        index.wikiata_id,
+        index.place_id, 
+        index.wikidata_id, 
         index.country_code,
         index.country_name,
-        index.locality_code,
-        index.locality_name,
-        index.datacommons_id,
-        index.subregion1_code,
-        index.subregion1_name,
-        index.subregion2_code,
-        index.subregion2_name,
-        index.aggregation_level,
+        index.locality_code, 
+        index.locality_name, 
+        index.datacommons_id, 
+        index.subregion1_code, 
+        index.subregion1_name, 
+        index.subregion2_code, 
+        index.subregion2_name, 
+        index.aggregation_level, 
         index.iso_3166_1_alpha_2,
         index.iso_3166_1_alpha_3
     from epidemiology
@@ -86,4 +86,3 @@ epidemiology_join as (
     )
 
 select * from epidemiology_join
-
