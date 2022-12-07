@@ -82,7 +82,6 @@ epidemiology_join as (
     left join demographics on epidemiology.location_key = demographics.location_key
     left join economy on epidemiology.location_key = economy.location_key
     left join index on epidemiology.location_key = index.location_key
-    order by date
 
     )
 

@@ -4,7 +4,6 @@ snowflake-dw:
     dev:
       type: snowflake
       account: mx48493.us-central1.gcp
-      
       # User/password auth
       user: AIRBYTE_USER
       password: AIRBYTE_PASSWORD
